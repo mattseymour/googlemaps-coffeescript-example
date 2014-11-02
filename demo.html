@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js"></script>
+      <script type="text/javascript" src="coffee-script.js"></script>
+        <style>
+        html. body
+        {
+            /*min-height: 100%;*/
+            height: 100%;
+        }
+        #map-canvas
+        {
+            width: 500px;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        </style>
+        <script type="text/coffeescript">
+        map = null
+        markers = [[51.4, -2.44],[51.382147, -2.14], [51.35, -2.67]]
+
+        initialize = () ->
+            # Setup map options
+            mapOptions =
+                center: new google.maps.LatLng 51.382147 , -2.358627
+                zoom: 10
+            map = new google.maps.Map document.getElementById("map-canvas"), mapOptions
+            for point in markers
+                addPoint point[0], point[1]
+            return
+
+        addPoint = (lat, long) ->
+            new google.maps.Marker({
+                position: new google.maps.LatLng lat, long
+                map:map
+            })
+
+        google.maps.event.addDomListener window, "load", initialize
+        </script>
+    </head>
+    <body>
+        <h3>Demo coffeescript and google maps</h3>
+        <p>This is a simple demo showing how to use coffeescipt and google maps.</p>
+        <p>For ease of use the coffee script has been added into the source of this page and is correctly rendered using: <a href="http://coffeescript.org/#scripts"><code><pre>coffee-script.js</pre></code></a> 
+        <p>In most cases you would extract this into its own coffee-script file which will be compiled by node.</p>
+        <p>To see the code used in this example view the source of this page.</p>
+        <a href="https://twitter.com/mattwritescode">@MattWritesCode</a>
+        <div id="map-canvas">
+        </div>
+    </body>
+</html>
